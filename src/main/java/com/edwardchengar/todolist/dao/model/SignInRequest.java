@@ -1,4 +1,4 @@
-package com.edwardchengar.todolist.model;
+package com.edwardchengar.todolist.dao.model;
 
 public class SignInRequest {
     private String userName;

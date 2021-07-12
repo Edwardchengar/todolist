@@ -1,4 +1,4 @@
-package com.edwardchengar.todolist.model.persistence;
+package com.edwardchengar.todolist.dao.model.persistence;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;

@@ -1,4 +1,4 @@
-package com.edwardchengar.todolist.model.persistence;
+package com.edwardchengar.todolist.dao.model.persistence;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.bson.types.ObjectId;

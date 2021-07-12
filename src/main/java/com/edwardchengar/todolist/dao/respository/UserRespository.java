@@ -1,6 +1,6 @@
-package com.edwardchengar.todolist.respository;
+package com.edwardchengar.todolist.dao.respository;
 
-import com.edwardchengar.todolist.model.persistence.MongoUser;
+import com.edwardchengar.todolist.dao.model.persistence.MongoUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

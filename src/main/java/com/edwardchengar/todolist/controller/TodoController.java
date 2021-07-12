@@ -1,7 +1,9 @@
 package com.edwardchengar.todolist.controller;
 
-import com.edwardchengar.todolist.model.persistence.Todo;
-import com.edwardchengar.todolist.respository.TodoRespository;
+import com.edwardchengar.todolist.dao.model.persistence.Todo;
+import com.edwardchengar.todolist.dao.respository.TodoRespository;
+import com.edwardchengar.todolist.service.TodoService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +13,16 @@ import java.util.List;
 @RequestMapping("/todos")
 public class TodoController {
     @Autowired
-    TodoRespository todoRespository;
+    TodoService todoService;
 
     @GetMapping("/{username}")
     public List<Todo> getTodo(@PathVariable("username") String username){
-        return todoRespository.findByUsername(username);
+        return todoService.getTodoByUserName(username);
     }
 
     @PostMapping("/{username}")
     public Todo insertTodo(@RequestBody Todo todoRequest){
-        todoRespository.insert(todoRequest);
-        return todoRequest;
+        return todoService.saveTodo(todoRequest);
     }
 
 

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.edwardchengar.todolist.util.TodoConstant.GRAPH_QL_PATTERN;
 import static com.edwardchengar.todolist.util.TodoConstant.USER_PATTERN;
 
 
@@ -56,7 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // We don't need CSRF for this example
         httpSecurity.csrf().disable()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers(USER_PATTERN +"/**").permitAll().
+                .authorizeRequests().antMatchers(GRAPH_QL_PATTERN+"/**").permitAll().
+                and().authorizeRequests().antMatchers(USER_PATTERN +"/**").permitAll().
                 // all other requests need to be authenticated
                         anyRequest().authenticated()
                 // make sure we use stateless session; session won't be used to

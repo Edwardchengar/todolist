@@ -2,6 +2,7 @@ package com.edwardchengar.todolist.config;
 
 import com.edwardchengar.todolist.service.UserService;
 import com.edwardchengar.todolist.util.JwtUtil;
+import com.edwardchengar.todolist.util.TodoConstant;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,7 +43,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
             }
         } else {
-            logger.warn("JWT Token does not begin with Bearer String");
+            if(!(httpServletRequest.getRequestURL().toString().contains(TodoConstant.GRAPH_QL_PATTERN))){
+                logger.warn("JWT Token does not begin with Bearer String");
+            }
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

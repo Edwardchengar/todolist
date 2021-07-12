@@ -1,8 +1,8 @@
 package com.edwardchengar.todolist.controller;
 
-import com.edwardchengar.todolist.model.SignInRequest;
-import com.edwardchengar.todolist.model.SignInResponse;
-import com.edwardchengar.todolist.model.persistence.MongoUser;
+import com.edwardchengar.todolist.dao.model.SignInRequest;
+import com.edwardchengar.todolist.dao.model.SignInResponse;
+import com.edwardchengar.todolist.dao.model.persistence.MongoUser;
 import com.edwardchengar.todolist.service.UserService;
 import com.edwardchengar.todolist.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,9 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @GetMapping(value = "/test")
-    public String test(){
-        return "h";
-    }
 
     @PostMapping(value = "/signup")
-    public ResponseEntity<?> signUp(@RequestBody MongoUser authenticationRequest) throws Exception {
+    public ResponseEntity<?> signUp(@RequestBody MongoUser authenticationRequest){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(authenticationRequest.getPassword().trim());
         MongoUser user = new MongoUser(authenticationRequest.getUserName(),encodedPassword);
