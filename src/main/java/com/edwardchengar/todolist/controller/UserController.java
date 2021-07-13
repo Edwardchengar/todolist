@@ -22,39 +22,16 @@ import static com.edwardchengar.todolist.util.TodoConstant.USER_PATTERN;
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
 
     @PostMapping(value = "/signup")
-    public ResponseEntity<?> signUp(@RequestBody MongoUser authenticationRequest){
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(authenticationRequest.getPassword().trim());
-        MongoUser user = new MongoUser(authenticationRequest.getUserName(),encodedPassword);
-        userService.createUser(user);
-        final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUserName());
-        final String token = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(token);
+    public ResponseEntity<?> signUp(@RequestBody MongoUser authenticationRequest) throws Exception{
+        userService.signUp(authenticationRequest);
+        return ResponseEntity.ok(authenticationRequest);
     }
 
     @PostMapping(value = "/signin")
     public ResponseEntity<SignInResponse> Authenticate(@RequestBody SignInRequest authenticationRequest) throws Exception {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
-        } catch (DisabledException e) {
-            e.printStackTrace();
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            e.printStackTrace();
-            throw new Exception("INVALID_CREDENTIALS", e);
-        }
-        UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUserName());
-
-        String token = jwtUtil.generateToken(userDetails);
-
-        SignInResponse response = new SignInResponse(token);
+        SignInResponse response = userService.authenticate(authenticationRequest.getUserName(),authenticationRequest.getPassword());
         return ResponseEntity.ok(response);
     }
 
