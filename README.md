@@ -4,7 +4,7 @@ to-do list backend created by Spring boot
 # Background
   
   This project aimed to provide a full-featured backend system for frontend application, in which frontend application can:
-  1. signup and sign in with different accounts
+  1. Signup and sign in with different accounts
   2. Create, and retrieve the to-do items belonging to user
 
 # Authentication
