@@ -16,9 +16,12 @@ import java.util.List;
 @Service
 @GraphQLApi
 public class TodoServiceImpl implements TodoService {
+    TodoRespository todoRespository;
 
     @Autowired
-    TodoRespository todoRespository;
+    public TodoServiceImpl(TodoRespository todoRespository) {
+        this.todoRespository = todoRespository;
+    }
 
     @GraphQLQuery(name = TodoConstant.GET_TODO_BY_USERNAME)
     public List<Todo> getTodoByUserName(String username){
