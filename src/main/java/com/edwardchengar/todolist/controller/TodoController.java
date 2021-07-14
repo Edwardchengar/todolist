@@ -1,9 +1,7 @@
 package com.edwardchengar.todolist.controller;
 
 import com.edwardchengar.todolist.dao.model.persistence.Todo;
-import com.edwardchengar.todolist.dao.respository.TodoRespository;
-import com.edwardchengar.todolist.service.TodoService;
-import org.checkerframework.checker.units.qual.A;
+import com.edwardchengar.todolist.service.interfaces.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

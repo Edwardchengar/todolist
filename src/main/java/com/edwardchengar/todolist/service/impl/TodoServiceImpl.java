@@ -1,7 +1,8 @@
-package com.edwardchengar.todolist.service;
+package com.edwardchengar.todolist.service.impl;
 
 import com.edwardchengar.todolist.dao.model.persistence.Todo;
 import com.edwardchengar.todolist.dao.respository.TodoRespository;
+import com.edwardchengar.todolist.service.interfaces.TodoService;
 import com.edwardchengar.todolist.util.TodoConstant;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Service
 @GraphQLApi
-public class TodoService {
+public class TodoServiceImpl implements TodoService {
 
     @Autowired
     TodoRespository todoRespository;
